@@ -21,4 +21,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+
+  def authenticated?(remember_token)
+    BCrypt::Password.new(remember_token).is_password?(remember_token)
+  end
+
 end
